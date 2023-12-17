@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.aula_final.entities.Avaliacao;
@@ -32,12 +33,12 @@ public class AvaliacaoController {
 	@Autowired
 	RestauranteRepository restauranteRepository;
 
+
 	@GetMapping()
-	public ResponseEntity<List<Avaliacao>> getAvaliacao() {
-		return ResponseEntity.status(HttpStatus.OK).body(repo.findAll());
+	public ResponseEntity<List<Avaliacao>> obterAvaliacoes(@PathVariable Long idRestaurante) {
+	    List<Avaliacao> avaliacoes = repo.findByRestauranteIdRestaurante(idRestaurante);
+	    return ResponseEntity.ok(avaliacoes);
 	}
-
-
 
 	@PostMapping()
     public ResponseEntity<Avaliacao> inserirAvaliacao(@PathVariable Long idRestaurante, @RequestBody Avaliacao avaliacao) {
@@ -66,11 +67,6 @@ public class AvaliacaoController {
 		}
 	}
 
-	@GetMapping
-	public ResponseEntity<List<Avaliacao>> obterAvaliacoesPorRestaurante(@PathVariable Long idRestaurante) {
-        List<Avaliacao> avaliacoes = repo.findByRestauranteId(idRestaurante);
-        return ResponseEntity.ok(avaliacoes);
-	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Avaliacao> deleteAvaliacao(@PathVariable("id") long id) {

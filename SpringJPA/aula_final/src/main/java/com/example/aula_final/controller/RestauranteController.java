@@ -39,8 +39,8 @@ public class RestauranteController {
 	}
 	
 	@PutMapping("/{idrestaurante}")
-	public ResponseEntity<Restaurante> alterarRestaurante(@PathVariable("idrestaurante")Long idrestaurante, @RequestBody Restaurante restaurante){
-		Optional<Restaurante> opRestaurante = repo.findById(idrestaurante);
+	public ResponseEntity<Restaurante> alterarRestaurante(@PathVariable("idrestaurante")Long idRestaurante, @RequestBody Restaurante restaurante){
+		Optional<Restaurante> opRestaurante = repo.findById(idRestaurante);
 		try {
 			Restaurante ct = opRestaurante.get();
 			ct.setNome(restaurante.getNome());

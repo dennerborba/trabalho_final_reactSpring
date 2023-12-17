@@ -11,5 +11,5 @@ import com.example.aula_final.entities.Avaliacao;
 
 @Repository
 public interface AvaliacaoRepository extends JpaRepository<Avaliacao, Long>{
-	List<Avaliacao> findByRestauranteId(Long idRestaurante);
+	List<Avaliacao> findByRestauranteIdRestaurante(Long idRestaurante);
 }

@@ -26,7 +26,7 @@ private String telefone;
 private String endereco;
 @Column (length = 100, nullable = false)
 private String descricao;
-@OneToMany(mappedBy = "Restaurante", cascade = CascadeType.ALL)
+@OneToMany(mappedBy = "restaurante", cascade = CascadeType.ALL)
 private List<Avaliacao> avaliacoes;
 
 

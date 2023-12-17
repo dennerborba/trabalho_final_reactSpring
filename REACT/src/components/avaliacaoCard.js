@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 export default function AvaliacaoCard(props){
 
     function excluirAvaliacao(){
-        fetch(`http://localhost:8080/restaurantes/${props.restaurante.id_restaurante}/avaliacoes/${props.avaliacao.id_avaliacao}` ,
+        fetch(`http://localhost:8080/restaurantes/${props.restaurante.idRestaurante}/avaliacoes/${props.avaliacao.id_avaliacao}` ,
         {
             method: 'DELETE'
         })

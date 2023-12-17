@@ -1,6 +1,8 @@
 package com.example.aula_final.controller;
 
+
 import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,28 +19,40 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.aula_final.entities.Avaliacao;
+import com.example.aula_final.entities.Restaurante;
 import com.example.aula_final.repository.AvaliacaoRepository;
+import com.example.aula_final.repository.RestauranteRepository;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping ("/avaliacoes")
+@RequestMapping("/restaurantes/{idRestaurante}/avaliacoes")
 public class AvaliacaoController {
 	@Autowired
 	AvaliacaoRepository repo;
-	
+	@Autowired
+	RestauranteRepository restauranteRepository;
+
 	@GetMapping()
 	public ResponseEntity<List<Avaliacao>> getAvaliacao() {
 		return ResponseEntity.status(HttpStatus.OK).body(repo.findAll());
 	}
-	
+
+
+
 	@PostMapping()
-	public ResponseEntity<Avaliacao> inserirAvaliacao(@RequestBody Avaliacao avaliacao){
-		Avaliacao ct = repo.save(avaliacao);
-		return ResponseEntity.status(HttpStatus.CREATED).body(ct);
-	}
-	
+    public ResponseEntity<Avaliacao> inserirAvaliacao(@PathVariable Long idRestaurante, @RequestBody Avaliacao avaliacao) {
+
+        Restaurante restaurante = new Restaurante();
+        restaurante.setIdRestaurante(idRestaurante);
+        avaliacao.setRestaurante(restaurante);
+
+        Avaliacao avaliacaoSalva = repo.save(avaliacao);
+        return ResponseEntity.status(HttpStatus.CREATED).body(avaliacaoSalva);
+    }
+
 	@PutMapping("/{idavaliacao}")
-	public ResponseEntity<Avaliacao> alterarAvaliacao(@PathVariable("idavaliacao")Long idavaliacao, @RequestBody Avaliacao avaliacao){
+	public ResponseEntity<Avaliacao> alterarAvaliacao(@PathVariable("idavaliacao") Long idavaliacao,
+			@RequestBody Avaliacao avaliacao) {
 		Optional<Avaliacao> opAvaliacao = repo.findById(idavaliacao);
 		try {
 			Avaliacao ct = opAvaliacao.get();
@@ -51,20 +65,15 @@ public class AvaliacaoController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 	}
-	
-	@GetMapping("/{id}")
-	public ResponseEntity<Avaliacao> getUmaAvaliacao (@PathVariable("id") long id) {
-		Optional<Avaliacao> opAvaliacao = repo.findById(id);
-		try {
-			Avaliacao ct = opAvaliacao.get();
-			return ResponseEntity.status(HttpStatus.OK).body(ct);
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-		}
+
+	@GetMapping
+	public ResponseEntity<List<Avaliacao>> obterAvaliacoesPorRestaurante(@PathVariable Long idRestaurante) {
+        List<Avaliacao> avaliacoes = repo.findByRestauranteId(idRestaurante);
+        return ResponseEntity.ok(avaliacoes);
 	}
-	
-	@DeleteMapping ("/{id}")
-	public ResponseEntity<Avaliacao> deleteAvaliacao (@PathVariable("id") long id) {
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Avaliacao> deleteAvaliacao(@PathVariable("id") long id) {
 		Optional<Avaliacao> opAvaliacao = repo.findById(id);
 		try {
 			Avaliacao ct = opAvaliacao.get();
@@ -75,4 +84,3 @@ public class AvaliacaoController {
 		}
 	}
 }
-

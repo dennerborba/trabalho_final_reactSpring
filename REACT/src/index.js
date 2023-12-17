@@ -10,9 +10,10 @@ import Consulta from './components/consultar';
 const rotas = createBrowserRouter([
   {
    path:"/",
-   element: <Consulta />,
+   element: <App />,
    children: [
-    {path: '/restaurantes', element: <Restaurantes />}
+    {path: '/restaurantes', element: <Consulta />},
+    {path: '/restaurantes/:idRestaurante', element: <Restaurantes />}
    ]
   }
 ])

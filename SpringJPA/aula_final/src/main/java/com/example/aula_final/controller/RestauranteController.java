@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.aula_final.entities.Restaurante;
 import com.example.aula_final.repository.RestauranteRepository;
 
-@CrossOrigin
+@CrossOrigin (origins = "http://localhost:3000")
 @RestController
 @RequestMapping ("/restaurantes")
 public class RestauranteController {
@@ -43,8 +43,8 @@ public class RestauranteController {
 		Optional<Restaurante> opRestaurante = repo.findById(idrestaurante);
 		try {
 			Restaurante ct = opRestaurante.get();
-			ct.setNome_restaurante(restaurante.getNome_restaurante());
-			ct.setTelefone_restaurante(restaurante.getTelefone_restaurante());
+			ct.setNome(restaurante.getNome());
+			ct.setTelefone(restaurante.getTelefone());
 			ct.setEndereco(restaurante.getEndereco());
 			ct.setDescricao(restaurante.getDescricao());
 			repo.save(ct);

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import Restaurantes from "./restaurantes"
+import RestauranteCard from "./restauranteCard"
 
 export default function Consulta() {
     const [restaurantes, setRestaurantes] = useState([])
@@ -11,9 +11,11 @@ export default function Consulta() {
     useEffect(consultarRestaurantes, [])
     return (
         <div>
+            <div className="d-block">
             {
-                restaurantes.map(rst => <Restaurantes restaurante ={rst}/>)
+                restaurantes.map(rst => <RestauranteCard restaurante ={rst}/>)
             }
+            </div>
         </div>
     )
 }

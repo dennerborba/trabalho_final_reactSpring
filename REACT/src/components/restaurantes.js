@@ -1,19 +1,30 @@
-export default function Restaurantes(props) {
- 
+import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
+import Avaliacao from "./avaliacao"
+
+export default function Restaurantes() {
+    const { idRestaurante } = useParams()
+    const [restaurante, setRestaurante] = useState('')
+    const [avaliacao, setAvaliacao] = useState('')
+    useEffect(() => {
+        fetch(`http://localhost:8080/restaurantes/${idRestaurante}`)
+            .then(response => response.json())
+            .then(data => setRestaurante(data))
+
+    }, [idRestaurante])
+
     return (
         <div className="container">
-            <div className="row p-3">
-                <span className={props.restaurante.nome}></span>
+            <div className="form-group">
+                <h1 className="text-center">{restaurante.nome}</h1>
+                <h2 className="text-center">{restaurante.descricao}</h2>
+                <h3 className="text-center">{restaurante.endereco}</h3>
+                <h3 className="text-center">{restaurante.telefone}</h3>
             </div>
-            <div className="row p-3">
-                <span className={props.restaurante.telefone}></span>
-            </div>
-            <div className="row p-3">
-                <span className={props.restaurante.endereco}></span>
-            </div>
-            <div className="row p-3">
-                <span className={props.restaurante.descricao}></span>
+            <div>
+                <Avaliacao />
             </div>
         </div>
     )
+
 }

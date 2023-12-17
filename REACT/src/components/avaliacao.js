@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function Avaliacao() {
     const [comentario, setComentario] = useState('')
-    const [avaliacao, setAvaliacao] = useState('')
+    const [classificacao, setClassificacao] = useState('')
+    const { idRestaurante } = useParams()
 
     function salvarComentario(){
-        let obj = {comentario: comentario, avaliacao: avaliacao}
-        fetch('http://localhost:8080/avaliacoes' ,
+        let obj = {comentario: comentario, classificacao: classificacao}
+        fetch(`http://localhost:8080/restaurantes/${idRestaurante}/avaliacoes` ,
         {
             method: 'POST',
             headers: {'Content-Type':'application/json'},
@@ -27,7 +28,7 @@ export default function Avaliacao() {
                             <textarea className="form-control" value={comentario} onChange={txt => setComentario(txt.target.value)}></textarea>
                         </div>
                         <label className="form-label">Selecione uma classificação para este restaurante</label>
-                        <select className="form-control" value={avaliacao}>
+                        <select className="form-control" value={classificacao} onChange={txt => setClassificacao(Number(txt.target.value))}>
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>

@@ -17,16 +17,16 @@ import jakarta.persistence.Table;
 public class Restaurante {
 @Id
 @GeneratedValue (strategy = GenerationType.IDENTITY)
-private Long id_restaurante;
+private Long idRestaurante;
 @Column(length = 50, nullable = false)
-private String nome_restaurante;
+private String nome;
 @Column(length = 15, nullable = false)
-private String telefone_restaurante;
+private String telefone;
 @Column(length = 100, nullable = false)
 private String endereco;
 @Column (length = 100, nullable = false)
 private String descricao;
-@OneToMany(mappedBy = "restaurante", cascade = CascadeType.ALL)
+@OneToMany(mappedBy = "Restaurante", cascade = CascadeType.ALL)
 private List<Avaliacao> avaliacoes;
 
 
@@ -34,32 +34,32 @@ private List<Avaliacao> avaliacoes;
 public Restaurante() {
 	super();
 }
-public Restaurante(Long id_restaurante, String nome_restaurante, String telefone_restaurante, String endereco,
+public Restaurante(Long idRestaurante, String nome, String telefone, String endereco,
 		String descricao) {
 	super();
-	this.id_restaurante = id_restaurante;
-	this.nome_restaurante = nome_restaurante;
-	this.telefone_restaurante = telefone_restaurante;
+	this.idRestaurante = idRestaurante;
+	this.nome = nome;
+	this.telefone= telefone;
 	this.endereco = endereco;
 	this.descricao = descricao;
 }
-public Long getId_restaurante() {
-	return id_restaurante;
+public Long getIdRestaurante() {
+	return idRestaurante;
 }
-public void setId_restaurante(Long id_restaurante) {
-	this.id_restaurante = id_restaurante;
+public void setIdRestaurante(Long idRestaurante) {
+	this.idRestaurante = idRestaurante;
 }
-public String getNome_restaurante() {
-	return nome_restaurante;
+public String getNome() {
+	return nome;
 }
-public void setNome_restaurante(String nome_restaurante) {
-	this.nome_restaurante = nome_restaurante;
+public void setNome(String nome) {
+	this.nome= nome;
 }
-public String getTelefone_restaurante() {
-	return telefone_restaurante;
+public String getTelefone() {
+	return telefone;
 }
-public void setTelefone_restaurante(String telefone_restaurante) {
-	this.telefone_restaurante = telefone_restaurante;
+public void setTelefone(String telefone) {
+	this.telefone = telefone;
 }
 public String getEndereco() {
 	return endereco;

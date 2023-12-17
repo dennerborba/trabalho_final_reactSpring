@@ -20,8 +20,8 @@ public class Avaliacao {
 	@Column(length = 5, nullable = false)
 	private int classificacao;
 	@ManyToOne
-	@JoinColumn(name = "restaurante_id", nullable = false)
-	private Restaurante restaurante;
+	@JoinColumn(name = "Restaurante", nullable = false)
+	private Restaurante Restaurante;
 
 	public Long getId_avaliacao() {
 		return id_avaliacao;
@@ -48,18 +48,18 @@ public class Avaliacao {
 	}
 
 	public Restaurante getRestaurante() {
-		return restaurante;
+		return Restaurante;
 	}
 
-	public void setRestaurante(Restaurante restaurante) {
-		this.restaurante = restaurante;
+	public void setRestaurante(Restaurante idRestaurante) {
+		this.Restaurante = idRestaurante;
 	}
 
-	public Avaliacao(Long id_avaliacao, String comentario, int classificacao, Restaurante restaurante) {
+	public Avaliacao(Long id_avaliacao, String comentario, int classificacao, Restaurante Restaurante) {
 		this.id_avaliacao = id_avaliacao;
 		this.comentario = comentario;
 		this.classificacao = classificacao;
-		this.restaurante = restaurante;
+		this.Restaurante = Restaurante;
 	}
 
 	public Avaliacao() {

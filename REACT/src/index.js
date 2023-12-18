@@ -5,7 +5,6 @@ import App from './App';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Restaurantes from './components/restaurantes';
 import EditarAvaliacao from './components/editarAvaliacao';
-import ConsultarAvaliacoes from './components/avaliacaoConsulta';
 import Consulta from './components/consultar';
 
 

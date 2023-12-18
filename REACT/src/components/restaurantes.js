@@ -16,7 +16,7 @@ export default function Restaurantes() {
     return (
         <div className="container">
             <div className="form-group">
-                <h1 className="text-center">{restaurante.nome}</h1>
+                <h1 className="text-center text-danger">{restaurante.nome}</h1>
                 <h2 className="text-center">{restaurante.descricao}</h2>
                 <h3 className="text-center">{restaurante.endereco}</h3>
                 <h3 className="text-center">{restaurante.telefone}</h3>

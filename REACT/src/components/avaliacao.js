@@ -41,7 +41,7 @@ export default function Avaliacao() {
                         </div>
                     </form>
                 </div>
-            </div >
+            </div>
         </div >
     )
 }

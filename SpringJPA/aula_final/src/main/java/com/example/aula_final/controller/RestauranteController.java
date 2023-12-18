@@ -69,7 +69,7 @@ public class RestauranteController {
 		}
 	}
 	
-	@GetMapping("/{idrestaurante}/avaliacoes/{idAvaliacao}")
+	@GetMapping("/restaurantes/{idrestaurante}/avaliacoes/{idAvaliacao}")
     public ResponseEntity<Avaliacao> obterAvaliacaoPorId(@PathVariable("idRestaurante") Long idRestaurante,@PathVariable("idAvaliacao") Long idAvaliacao) {
 
         Optional<Avaliacao> opAvaliacao = repos.findById(idAvaliacao);

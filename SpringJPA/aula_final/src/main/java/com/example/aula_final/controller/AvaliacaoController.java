@@ -83,7 +83,7 @@ public class AvaliacaoController {
 	    Optional<Avaliacao> opAvaliacao = repo.findById(idAvaliacao);
 
 	    try {
-	        Avaliacao ct = opAvaliacao.orElseThrow();
+	        Avaliacao ct = opAvaliacao.get();
 	        repo.delete(ct);
 	        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	    } catch (Exception e) {

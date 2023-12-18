@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import Avaliacao from "./avaliacao"
-import MostrarAvaliacoes from "./mostrarAvaliacoes"
-
+import ConsultarAvaliacoes from "./avaliacaoConsulta"
+//página que lista restaurantes e avaliações
 export default function Restaurantes() {
     const { idRestaurante } = useParams()
     const [restaurante, setRestaurante] = useState('')
@@ -24,8 +24,8 @@ export default function Restaurantes() {
             <div>
                 <Avaliacao />
             </div>
-            <div>
-                <MostrarAvaliacoes />
+            <div className="mt-4  ">
+                <ConsultarAvaliacoes />
             </div>
         </div>
     )

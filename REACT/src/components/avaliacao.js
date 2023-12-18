@@ -37,7 +37,7 @@ export default function Avaliacao() {
                         </select>
                         <div className="mt-3 d-flex justify-content-around">
                             <button onClick={salvarComentario} className="btn btn-outline-success">Salvar</button>
-                            <Link to={'/restaurantes'}><button className="btn btn-outline-danger">Cancelar</button></Link>
+                            <Link to={'/restaurantes'}><button className="btn btn-outline-danger">Voltar</button></Link>
                         </div>
                     </form>
                 </div>

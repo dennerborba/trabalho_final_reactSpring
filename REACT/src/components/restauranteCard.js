@@ -8,8 +8,8 @@ export default function RestauranteCard(props){
                 <h2>{props.restaurante.descricao}</h2>
                 <p>Telefone: {props.restaurante.telefone}</p>
                 <p>Endereço: {props.restaurante.endereco}</p>
-
             </div>
         </div>
+        
     )
 }

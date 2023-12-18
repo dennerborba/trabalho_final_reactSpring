@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.aula_final.entities.Avaliacao;
@@ -51,15 +51,13 @@ public class AvaliacaoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(avaliacaoSalva);
     }
 
-	@PutMapping("/{idavaliacao}")
-	public ResponseEntity<Avaliacao> alterarAvaliacao(@PathVariable("idavaliacao") Long idavaliacao,
-			@RequestBody Avaliacao avaliacao) {
-		Optional<Avaliacao> opAvaliacao = repo.findById(idavaliacao);
+	@PutMapping("/{idAvaliacao}")
+	public ResponseEntity<Avaliacao> alterarAvaliacao(@PathVariable("idRestaurante") Long idRestaurante,@PathVariable("idAvaliacao") Long idAvaliacao,@RequestBody Avaliacao avaliacao) {
+		Optional<Avaliacao> opAvaliacao = repo.findById(idAvaliacao);
 		try {
 			Avaliacao ct = opAvaliacao.get();
 			ct.setComentario(avaliacao.getComentario());
 			ct.setClassificacao(avaliacao.getClassificacao());
-			ct.setRestaurante(avaliacao.getRestaurante());
 			repo.save(ct);
 			return ResponseEntity.status(HttpStatus.OK).body(avaliacao);
 		} catch (Exception e) {
@@ -67,16 +65,29 @@ public class AvaliacaoController {
 		}
 	}
 
+	@GetMapping("/{idAvaliacao}")
+    public ResponseEntity<Avaliacao> obterAvaliacaoPorId(@PathVariable("idRestaurante") Long idRestaurante,@PathVariable("idAvaliacao") Long idAvaliacao) {
 
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Avaliacao> deleteAvaliacao(@PathVariable("id") long id) {
-		Optional<Avaliacao> opAvaliacao = repo.findById(id);
-		try {
-			Avaliacao ct = opAvaliacao.get();
-			repo.delete(ct);
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-		}
+        Optional<Avaliacao> opAvaliacao = repo.findById(idAvaliacao);
+        return opAvaliacao.map(avaliacao ->
+                ResponseEntity.ok(avaliacao)
+        ).orElseGet(() ->
+                ResponseEntity.notFound().build()
+        );
+    }
+	
+
+	@DeleteMapping("/{idAvaliacao}")
+	public ResponseEntity<Void> deleteAvaliacao(@PathVariable("idRestaurante") Long idRestaurante,@PathVariable("idAvaliacao") Long idAvaliacao) {
+
+	    Optional<Avaliacao> opAvaliacao = repo.findById(idAvaliacao);
+
+	    try {
+	        Avaliacao ct = opAvaliacao.orElseThrow();
+	        repo.delete(ct);
+	        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+	    } catch (Exception e) {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+	    }
 	}
 }

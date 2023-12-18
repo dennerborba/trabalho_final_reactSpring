@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.aula_final.entities.Avaliacao;
 import com.example.aula_final.entities.Restaurante;
+import com.example.aula_final.repository.AvaliacaoRepository;
 import com.example.aula_final.repository.RestauranteRepository;
 
 @CrossOrigin (origins = "http://localhost:3000")
@@ -26,6 +28,8 @@ public class RestauranteController {
 
 	@Autowired
 	RestauranteRepository repo;
+	@Autowired
+	AvaliacaoRepository repos;
 	
 	@GetMapping()
 	public ResponseEntity<List<Restaurante>> getRestaurantes() {
@@ -64,6 +68,18 @@ public class RestauranteController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 	}
+	
+	@GetMapping("/{idrestaurante}/avaliacoes/{idAvaliacao}")
+    public ResponseEntity<Avaliacao> obterAvaliacaoPorId(@PathVariable("idRestaurante") Long idRestaurante,@PathVariable("idAvaliacao") Long idAvaliacao) {
+
+        Optional<Avaliacao> opAvaliacao = repos.findById(idAvaliacao);
+        return opAvaliacao.map(avaliacao ->
+                ResponseEntity.ok(avaliacao)
+        ).orElseGet(() ->
+                ResponseEntity.notFound().build()
+        );
+    }
+	
 	
 	@DeleteMapping ("/{id}")
 	public ResponseEntity<Restaurante> deleteRestaurante (@PathVariable("id") long id) {

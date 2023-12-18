@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import Avaliacao from "./avaliacao"
+import MostrarAvaliacoes from "./mostrarAvaliacoes"
 
 export default function Restaurantes() {
     const { idRestaurante } = useParams()
     const [restaurante, setRestaurante] = useState('')
-    const [avaliacao, setAvaliacao] = useState('')
     useEffect(() => {
         fetch(`http://localhost:8080/restaurantes/${idRestaurante}`)
             .then(response => response.json())
@@ -23,6 +23,9 @@ export default function Restaurantes() {
             </div>
             <div>
                 <Avaliacao />
+            </div>
+            <div>
+                <MostrarAvaliacoes />
             </div>
         </div>
     )

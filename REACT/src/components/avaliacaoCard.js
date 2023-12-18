@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
 export default function AvaliacaoCard(props){
-
+    
     function excluirAvaliacao(){
         fetch(`http://localhost:8080/restaurantes/${props.restaurante.idRestaurante}/avaliacoes/${props.avaliacao.id_avaliacao}` ,
         {
@@ -21,7 +21,7 @@ export default function AvaliacaoCard(props){
                 <span className="text-dark">{props.avaliacao.classificacao}</span>
             </div>
             <div className="mt-2 d-flex justify-content-between">
-                <Link to={`restaurante/avaliacao/editar/${props.avaliacao.id}`}><button className="btn btn-outline-primary">Editar Avaliação</button></Link>
+                <Link to={`/avaliacoes/editar/${props.avaliacao.id_avaliacao}`}><button className="btn btn-outline-primary">Editar Avaliação</button></Link>
                 <button onClick={excluirAvaliacao} className="btn btn-outline-danger">Excluir</button>
             </div>
         </div>
